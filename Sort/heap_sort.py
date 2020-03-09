@@ -1,0 +1,32 @@
+'''
+堆排序
+'''
+def heapify(unsorted,index,heap_size):
+    largest = index
+    left_index = 2 * index + 1
+    right_index = 2 * index + 2
+    if left_index < heap_size and unsorted[left_index] > unsorted[largest]:
+        largest = left_index
+
+    if right_index < heap_size and unsorted[right_index] > unsorted[largest]:
+        largest = right_index
+
+    if largest != index:
+        unsorted[largest], unsorted[index] = unsorted[index],unsorted[largest]
+        heapify(unsorted,largest,heap_size)
+
+def heap_sort(unsorted):
+    ln = len(unsorted)
+    for i in range( ln//2 -1, -1,-1):
+        heapify(unsorted, i, ln)
+    for i in range(ln-1, 0, -1):
+        unsorted[0], unsorted[i] = unsorted[i], unsorted[0]
+        heapify(unsorted,0,i)
+    return unsorted
+
+if __name__ == "__main__":
+    #user_input = input("enter numbers separated by a comma:\n").strip()
+    #unsorted = [int(i) for i in user_input.split(",")]
+    unsorted = [9,8,7,6,5,4,3,2,1]
+    print(unsorted)
+    print(heap_sort(unsorted))
