@@ -33,13 +33,13 @@ def payment_status(payment): # 前端展示支付效果
 
 class TestPayment(unittest.TestCase):
     def test_01(self): # 测试支付成功的方法，使用mock模拟功能返回结果
-        payment = MagicMock(return_value={"result":"success","reason":"null"})
+        payment = Mock(return_value={"result":"success","reason":"null"})
         status = payment_status(payment)
         print(status)
         self.assertEqual(status,"success")
 
     def test_02(self): # 测试支付失败的方法
-        payment = Mock(return_value={"result":"failed","reason":"insufficient balance"})
+        payment = MagicMock(return_value={"result":"failed","reason":"insufficient balance"})
         status = payment_status(payment)
         print(status)
         self.assertEqual(status,"failed")
